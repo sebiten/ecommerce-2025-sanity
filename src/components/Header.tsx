@@ -5,12 +5,21 @@ import Form from 'next/form';
 import React from 'react'
 import { PackageIcon, TrolleyIcon } from '@sanity/icons';
 import { User } from '@clerk/nextjs/server';
+import { Button } from './ui/button';
 
 export default function Header() {
   const { user } = useUser();
   console.log(user);
 
-  const createClerkPasskey = async () => { }
+  const createClerkPasskey = async () => {
+    try {
+      const response = await user?.createPasskey();
+      console.log(response);
+    } catch (error) {
+      console.error("Error", JSON.stringify(error, null, 2));
+    }
+
+  }
 
   return (
     <header className='flex flex-wrap  justify-between items-center px-4 py-2'>
@@ -52,7 +61,7 @@ export default function Header() {
             )}
 
             {user?.passkeys.length === 0 && (
-              <button onClick={createClerkPasskey} className='text-blue-500 underline'>Create a passkey</button>
+              <Button variant={"outline"} onClick={createClerkPasskey} className='text-blue-500 underline'>Create a passkey</Button>
             )}
           </ClerkLoaded>
         </div>

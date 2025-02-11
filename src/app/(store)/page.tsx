@@ -1,9 +1,16 @@
-import Image from "next/image";
+import ProductsView from "@/components/ProductsView";
+import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
+import { getAllProducts } from "@/sanity/lib/products/getAllProducts";
 
-export default function Home() {
+export default async function Home() {
+  const products = await getAllProducts();
+  const categories = await getAllCategories();
+
   return (
-  <>
-    <h1>Next.js + Clerk</h1>
-  </>
+    <div>
+      <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-200">
+        <ProductsView products={products} categories={categories} />
+      </div>
+    </div>
   );
 }

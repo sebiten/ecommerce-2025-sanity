@@ -1,3 +1,4 @@
+import BlackFridayBanner from "@/components/BlackFridayBanner";
 import ProductsView from "@/components/ProductsView";
 import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
 import { getAllProducts } from "@/sanity/lib/products/getAllProducts";
@@ -8,6 +9,7 @@ export default async function Home() {
 
   return (
     <div>
+      <BlackFridayBanner />
       <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-200">
         <ProductsView products={products} categories={categories} />
       </div>
